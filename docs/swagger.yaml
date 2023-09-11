@@ -1,0 +1,507 @@
+definitions:
+  service.ApplicationF:
+    properties:
+      applicantid:
+        type: integer
+      applicantname:
+        type: string
+      reviewerid:
+        type: integer
+      reviewername:
+        type: string
+    required:
+    - applicantid
+    - applicantname
+    - reviewerid
+    - reviewername
+    type: object
+  service.Mgroup:
+    properties:
+      description:
+        maxLength: 250
+        minLength: 10
+        type: string
+      gid:
+        type: integer
+      groupname:
+        maxLength: 12
+        minLength: 2
+        type: string
+      uid:
+        type: integer
+    required:
+    - description
+    - groupname
+    - uid
+    type: object
+  service.userLogin:
+    properties:
+      password:
+        maxLength: 20
+        minLength: 6
+        type: string
+      phone:
+        type: string
+    required:
+    - password
+    - phone
+    type: object
+  service.userParam:
+    properties:
+      oldpassword:
+        maxLength: 20
+        minLength: 6
+        type: string
+      password:
+        maxLength: 20
+        minLength: 6
+        type: string
+      phone:
+        type: string
+      repassword:
+        maxLength: 20
+        minLength: 6
+        type: string
+      roleId:
+        type: integer
+      username:
+        maxLength: 12
+        minLength: 2
+        type: string
+    required:
+    - password
+    - phone
+    - repassword
+    - username
+    type: object
+host: 222.196.37.70:8080
+info:
+  contact:
+    name: go-swagger文档
+    url: https://github.com/swaggo/swag/blob/master/README_zh-CN.md
+  description: gin+gorm 后台API
+  license:
+    name: Apache 2.0
+  title: gin+gorm 测试swagger
+  version: v1.0
+paths:
+  /api/addFriendAppli:
+    post:
+      parameters:
+      - description: 申请表单
+        in: body
+        name: ApplicationF
+        required: true
+        schema:
+          $ref: '#/definitions/service.ApplicationF'
+      responses:
+        "200":
+          description: code","message"}
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 新增好友申请
+      tags:
+      - 好友/群聊申请模块
+  /api/addGroupAppli:
+    post:
+      parameters:
+      - description: 申请表单
+        in: body
+        name: ApplicationF
+        required: true
+        schema:
+          $ref: '#/definitions/service.ApplicationF'
+      responses:
+        "200":
+          description: code","message"}
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 新增群聊申请
+      tags:
+      - 好友/群聊申请模块
+  /api/addUser:
+    post:
+      parameters:
+      - description: 用户
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/service.userParam'
+      responses:
+        "200":
+          description: code","message"}
+          schema:
+            type: string
+      summary: 新增用户
+      tags:
+      - 用户模块
+  /api/createGroup:
+    post:
+      parameters:
+      - description: 群聊信息
+        in: body
+        name: Mgroup
+        required: true
+        schema:
+          $ref: '#/definitions/service.Mgroup'
+      responses:
+        "200":
+          description: code","message"}
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 新增群聊
+      tags:
+      - 群聊管理模块
+  /api/dealFriendAppli:
+    get:
+      parameters:
+      - description: 申请Id
+        in: query
+        name: aid
+        required: true
+        type: integer
+      - description: 是否同意
+        in: query
+        name: flag
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: code","message"}
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 好友处理申请
+      tags:
+      - 好友/群聊申请模块
+  /api/dealGroupAppli:
+    get:
+      parameters:
+      - description: 申请Id
+        in: query
+        name: aid
+        required: true
+        type: integer
+      - description: 是否同意
+        in: query
+        name: flag
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: code","message"}
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 群主处理申请
+      tags:
+      - 好友/群聊申请模块
+  /api/deleteFriends:
+    get:
+      parameters:
+      - description: 好友id
+        in: query
+        name: fid
+        required: true
+        type: string
+      responses:
+        "200":
+          description: code","message"}
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 删除好友
+      tags:
+      - 好友管理模块
+  /api/deleteGroup:
+    get:
+      parameters:
+      - description: 群聊id
+        in: query
+        name: gid
+        required: true
+        type: string
+      responses:
+        "200":
+          description: code","message"}
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 删除群聊
+      tags:
+      - 群聊管理模块
+  /api/deleteUser:
+    get:
+      parameters:
+      - description: 用户id
+        in: query
+        name: uid
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: code","message"}
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 删除用户
+      tags:
+      - 用户模块
+  /api/downloadfile:
+    get:
+      parameters:
+      - description: file路径
+        in: query
+        name: filepath
+        required: true
+        type: string
+      responses:
+        "200":
+          description: code","message"}
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 文件下载
+      tags:
+      - 消息模块
+  /api/getAllUser:
+    get:
+      responses:
+        "200":
+          description: code","message"}
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 查询所有用户
+      tags:
+      - 用户模块
+  /api/getAppliMsg:
+    get:
+      responses:
+        "200":
+          description: code","message"}
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 申请人查询申请信息
+      tags:
+      - 好友/群聊申请模块
+  /api/getFhistoryMsg:
+    get:
+      parameters:
+      - description: 好友id
+        in: query
+        name: fid
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: code","message"}
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 获取与的好友历史消息
+      tags:
+      - 消息模块
+  /api/getGhistoryMsg:
+    get:
+      parameters:
+      - description: 群聊id
+        in: query
+        name: gid
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: code","message"}
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 获取群聊历史消息
+      tags:
+      - 消息模块
+  /api/getGroupByGid:
+    get:
+      parameters:
+      - description: 群id
+        in: query
+        name: gid
+        required: true
+        type: string
+      responses:
+        "200":
+          description: code","message"}
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 使用Gid查询群聊
+      tags:
+      - 群聊管理模块
+  /api/getGroupByName:
+    get:
+      parameters:
+      - description: 群名
+        in: query
+        name: gname
+        required: true
+        type: string
+      responses:
+        "200":
+          description: code","message"}
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 群名模糊查询群聊
+      tags:
+      - 群聊管理模块
+  /api/getfriends:
+    get:
+      responses:
+        "200":
+          description: code","message"}
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 获取好友列表
+      tags:
+      - 好友管理模块
+  /api/getwsconn:
+    get:
+      responses:
+        "200":
+          description: code","message"}
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 建立websocket连接
+      tags:
+      - 消息模块
+  /api/login:
+    post:
+      parameters:
+      - description: 用户
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/service.userLogin'
+      responses:
+        "200":
+          description: code","message"}
+          schema:
+            type: string
+      summary: 用户登录
+      tags:
+      - 用户模块
+  /api/test:
+    get:
+      parameters:
+      - description: 用户id
+        in: query
+        name: uid
+        type: string
+      responses:
+        "200":
+          description: code","message"}
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 查询用户
+      tags:
+      - 用户模块
+  /api/updateGroup:
+    post:
+      parameters:
+      - description: 群聊信息
+        in: body
+        name: Mgroup
+        required: true
+        schema:
+          $ref: '#/definitions/service.Mgroup'
+      responses:
+        "200":
+          description: code","message"}
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 更新群聊
+      tags:
+      - 群聊管理模块
+  /api/updateUser:
+    post:
+      parameters:
+      - description: 用户
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/service.userParam'
+      responses:
+        "200":
+          description: code","message"}
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 更新用户
+      tags:
+      - 用户模块
+  /api/uploadfile:
+    post:
+      parameters:
+      - description: file
+        in: formData
+        name: file
+        required: true
+        type: file
+      responses:
+        "200":
+          description: code","message"}
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 文件上传
+      tags:
+      - 消息模块
+  /api/userGetAppliMsg:
+    get:
+      responses:
+        "200":
+          description: code","message"}
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 好友接受者查询申请信息
+      tags:
+      - 好友/群聊申请模块
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
